@@ -7,7 +7,7 @@ import streamlit as st
 from google.oauth2.service_account import Credentials
 import webbrowser
 
-# SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 # def authenticate_drive():
 #     flow = InstalledAppFlow.from_client_secrets_file(
@@ -17,47 +17,47 @@ import webbrowser
 #     service = build('drive', 'v3', credentials=creds)
 #     return service
 
-# def authenticate_drive():
-#     """Authenticate with Google Drive using credentials stored in Streamlit secrets"""
-#     credentials_info = st.secrets["installed"]  # ✅ Read from secrets
-#     creds = Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
-#     service = build('drive', 'v3', credentials=creds)
-#     return service
-
-# Register Google Chrome as the default browser (use correct Chrome path)
-webbrowser.register('chrome', None, webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
-
-# Define the scope(s) you need. Example below is for Drive read-only.
-SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
-
 def authenticate_drive():
-    # Build a dictionary from st.secrets that matches the shape
-    # of your original client_secret.json
-    client_config = {
-        "web": {
-            "client_id": st.secrets["web"]["client_id"],
-            "project_id": st.secrets["web"]["project_id"],
-            "auth_uri": st.secrets["web"]["auth_uri"],
-            "token_uri": st.secrets["web"]["token_uri"],
-            "auth_provider_x509_cert_url": st.secrets["web"]["auth_provider_x509_cert_url"],
-            "client_secret": st.secrets["web"].get("client_secret", ""),
-            "redirect_uris": [
-                # If your original JSON had multiple redirect URIs,
-                # add them here. Example:
-                "http://localhost"
-            ]
-        }
-    }
-
-    # Create the flow using the in-memory config
-    flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
-    
-    # Run the local server flow to get credentials
-    creds = flow.run_local_server(port=0)
-    
-    # Build the Drive service
-    service = build("drive", "v3", credentials=creds)
+    """Authenticate with Google Drive using credentials stored in Streamlit secrets"""
+    credentials_info = st.secrets["web"]  # ✅ Read from secrets
+    creds = Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
+    service = build('drive', 'v3', credentials=creds)
     return service
+
+# # Register Google Chrome as the default browser (use correct Chrome path)
+# webbrowser.register('chrome', None, webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
+
+# # Define the scope(s) you need. Example below is for Drive read-only.
+# SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
+
+# def authenticate_drive():
+#     # Build a dictionary from st.secrets that matches the shape
+#     # of your original client_secret.json
+#     client_config = {
+#         "web": {
+#             "client_id": st.secrets["web"]["client_id"],
+#             "project_id": st.secrets["web"]["project_id"],
+#             "auth_uri": st.secrets["web"]["auth_uri"],
+#             "token_uri": st.secrets["web"]["token_uri"],
+#             "auth_provider_x509_cert_url": st.secrets["web"]["auth_provider_x509_cert_url"],
+#             "client_secret": st.secrets["web"].get("client_secret", ""),
+#             "redirect_uris": [
+#                 # If your original JSON had multiple redirect URIs,
+#                 # add them here. Example:
+#                 "http://localhost"
+#             ]
+#         }
+#     }
+
+#     # Create the flow using the in-memory config
+#     flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
+    
+#     # Run the local server flow to get credentials
+#     creds = flow.run_local_server(port=0)
+    
+#     # Build the Drive service
+#     service = build("drive", "v3", credentials=creds)
+#     return service
 
 
 
