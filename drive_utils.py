@@ -4,6 +4,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 import streamlit as st
+from google.oauth2.service_account import Credentials
 
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
