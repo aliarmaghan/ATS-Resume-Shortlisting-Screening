@@ -51,7 +51,7 @@ def authenticate_drive():
     flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
     
     # Run the local server flow to get credentials
-    creds = flow.run_local_server(port=8501)
+    creds = flow.run_local_server(port=0)
     
     # Build the Drive service
     service = build("drive", "v3", credentials=creds)
