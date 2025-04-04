@@ -24,7 +24,8 @@ import webbrowser
 #     service = build('drive', 'v3', credentials=creds)
 #     return service
 
-
+# Register Google Chrome as the default browser (use correct Chrome path)
+webbrowser.register('chrome', None, webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
 
 # Define the scope(s) you need. Example below is for Drive read-only.
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
