@@ -80,7 +80,7 @@ def authenticate_drive():
 
     creds = service_account.Credentials.from_service_account_info(
         service_account_info,
-        scopes=["https://www.googleapis.com/auth/drive"]
+        scopes=["https://www.googleapis.com/auth/drive.readonly"]
     )
     drive_service = build("drive", "v3", credentials=creds)
     return drive_service
