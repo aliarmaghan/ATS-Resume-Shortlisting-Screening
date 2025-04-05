@@ -1,5 +1,3 @@
-# streamlit_app/main.py
-
 import streamlit as st
 from drive_utils import authenticate_drive, list_folders, list_pdfs_in_folder, download_pdf
 import requests
@@ -15,14 +13,18 @@ if 'drive_service' not in st.session_state:
         st.session_state.drive_service = authenticate_drive()
         st.success("✅ Authenticated successfully!")
 
+
+
+
 # Step 2: Browse folders
 if 'drive_service' in st.session_state:
+    print("ok")
     folders = list_folders(st.session_state.drive_service)
     folder_options = {f['name']: f['id'] for f in folders}
-
+    print("ok1")
     st.markdown("### 📁 Select a folder in your Drive:")
     selected_folder = st.selectbox("Choose a folder", list(folder_options.keys()))
-
+    print("ok2")
     if selected_folder:
         folder_id = folder_options[selected_folder]
         pdf_files = list_pdfs_in_folder(st.session_state.drive_service, folder_id)
