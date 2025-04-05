@@ -7,7 +7,7 @@ import streamlit as st
 from google.oauth2.service_account import Credentials
 import webbrowser
 
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+# SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 # def authenticate_drive():
 #     flow = InstalledAppFlow.from_client_secrets_file(
