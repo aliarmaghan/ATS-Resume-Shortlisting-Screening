@@ -17,12 +17,12 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 #     service = build('drive', 'v3', credentials=creds)
 #     return service
 
-def authenticate_drive():
-    """Authenticate with Google Drive using credentials stored in Streamlit secrets"""
-    credentials_info = st.secrets["web"]  # ✅ Read from secrets
-    creds = Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
-    service = build('drive', 'v3', credentials=creds)
-    return service
+# def authenticate_drive():
+#     """Authenticate with Google Drive using credentials stored in Streamlit secrets"""
+#     credentials_info = st.secrets["web"]  # ✅ Read from secrets
+#     creds = Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
+#     service = build('drive', 'v3', credentials=creds)
+#     return service
 
 # # Register Google Chrome as the default browser (use correct Chrome path)
 # webbrowser.register('chrome', None, webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
@@ -58,6 +58,32 @@ def authenticate_drive():
 #     # Build the Drive service
 #     service = build("drive", "v3", credentials=creds)
 #     return service
+
+
+import streamlit as st
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+def authenticate_drive():
+    service_account_info = {
+        "type": st.secrets["TYPE"],
+        "project_id": st.secrets["PROJECT_ID"],
+        "private_key_id": st.secrets["PRIVATE_KEY_ID"],
+        "private_key": st.secrets["PRIVATE_KEY"].replace("\\n", "\n"),
+        "client_email": st.secrets["CLIENT_EMAIL"],
+        "client_id": st.secrets["CLIENT_ID"],
+        "auth_uri": st.secrets["AUTH_URI"],
+        "token_uri": st.secrets["TOKEN_URI"],
+        "auth_provider_x509_cert_url": st.secrets["AUTH_PROVIDER_X509_CERT_URL"],
+        "client_x509_cert_url": st.secrets["CLIENT_X509_CERT_URL"]
+    }
+
+    creds = service_account.Credentials.from_service_account_info(
+        service_account_info,
+        scopes=["https://www.googleapis.com/auth/drive"]
+    )
+    drive_service = build("drive", "v3", credentials=creds)
+    return drive_service
 
 
 
