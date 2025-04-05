@@ -36,14 +36,16 @@ def authenticate_drive():
             "redirect_uris": st.secrets["installed"]["redirect_uris"]
         }
     }
+    print("okay")
 
     # Create OAuth flow
     flow = InstalledAppFlow.from_client_config(credentials_info, SCOPES)
+    print("okay2")
     creds = flow.run_local_server(port=0)
-
+    print("okay3")
     # Build the service
     service = build('drive', 'v3', credentials=creds)
-    
+    print("okay4")
     return service
 
 
